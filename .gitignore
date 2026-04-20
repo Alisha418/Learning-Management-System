@@ -1,0 +1,13 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.vscode/
+.idea/
+
+# Database files (Optional: agar aap backup upload nahi karna chahti)
+# edusphere2.sql 
+
+# Environment/Config files (IMPORTANT: agar inmein password hai)
+# config.php

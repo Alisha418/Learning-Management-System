@@ -1,0 +1,1032 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background: rgb(234, 228, 228);
+}
+
+.dashboard {
+    display: flex;
+    width: 100%;
+}
+
+/* h2{
+    font-weight: bold;
+    text-align: center;
+    color: #2f2f4c;
+} */
+
+/* default sidebar */
+.sidebar {
+    width: 240px;
+    background: #2f2f4c;
+    color: white;
+    height: 100vh;
+    padding: 15px;
+    position: fixed; /* Keeps sidebar fixed */
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+
+/* Hide Close Button on Large Screens */
+.close-btn {
+    display: none;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none !important;
+    display: flex;  /* Align icon and text */
+    align-items: center;
+    padding: 5px 13px;
+    border-radius: 8px;
+    transition: background 0.3s ease-in-out, color 0.3s;
+    font-size: 18px;
+    margin-bottom: 8px; /* Spacing between items */
+    width: 100%; /* Ensures full width for better hover effect */
+}
+
+/* Add spacing between icon and text */
+.sidebar ul li a i {
+    margin-right: 10px; /* Space between icon and text */
+    font-size: 18px;
+}
+
+.sidebar ul li a:hover {
+    background: #d3d1f9; /* Lavender */
+    color: #30304d; /* Dark Blue Gray */
+}
+
+/* Hover Effect on Icons */
+.sidebar ul li a:hover i {
+    color: #30304d; /* Dark Blue Gray */
+    background: transparent; /* No background for icons */
+}
+
+.content {
+    margin-left: 195px;
+    padding: 22px;
+    min-height: 100vh;
+    flex: 1;
+    background-color: #eae4e4;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Section */
+.profile-section {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.profile-icon {
+    font-size: 60px;
+    color:white; 
+}
+
+/* Profile Card Styling */
+ /* Main Container */
+ .profile-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: rgba(54, 84, 190, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    
+}
+
+/* Profile Header */
+.profile-header {
+    /* background: linear-gradient(135deg, #1E3A8A, #6ea8db); */
+    background-color: #8174A0;
+    padding: 30px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-align: left;
+}
+
+.profile-header img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid white;
+    margin-right: 20px;
+}
+
+.profile-header h2 {
+    font-size: 28px;
+    margin: 0;
+}
+
+/* Profile Info */
+.profile-details {
+    padding: 20px;
+}
+
+.profile-details p {
+    font-size: 18px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.profile-details i {
+    margin-right: 12px;
+    color: #1E3A8A;
+    font-size: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-header img {
+        margin-bottom: 10px;
+    }
+
+    .extra-info {
+        flex-direction: column;
+    }
+}
+
+
+.card {
+    flex: 1;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Dropdown Styling */
+select {
+    width: 200px;
+    padding: 8px;
+    margin: 10px 10px 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #8174A0;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* QUIZ Form & Button Styling */
+input, select {
+    width: 200px;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Default Styling for Quiz Section */
+#quizzesSection .card label {
+    /* display: block; */
+    /* font-weight: bold; */
+    margin-top: 10px;
+}
+
+button {
+    margin: 5px;
+    padding: 8px;
+    border: none;
+    background-color: #8174A0;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+button:hover {
+    background-color: #4b235e;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Quiz Card Styling */
+.quiz-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: white;
+}
+
+input[type="radio"] {
+        transform: scale(1.3); /* Bigger radio buttons */
+        margin: 5px;
+    }
+
+/* Feedback */
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    width: 300px; /* Adjust width */
+    height: 300px; /* Adjust height */
+    margin: 20px auto; /* Centers the div */
+}
+canvas {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#overallFeedback {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Articles Container */
+.articles-container {
+    max-width: 850px; /* Slightly increased width */
+    margin: 0 auto;
+}
+
+/* Article Card */
+.article-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Article Image */
+.article-card img {
+    width: 200px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+/* Article Content */
+.article-content {
+    flex: 1;
+}
+
+/* Article Title */
+.article-content h3 {
+    font-size: 20px;
+    color: #1E3A8A;
+    margin-bottom: 5px;
+}
+
+/* Article Description */
+.article-content p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Read More Link */
+.read-more {
+    color: #1E3A8A;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+/* Dashboard Overview */
+.dashboard-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* Welcome Section */
+.welcome-section {
+    flex: 2;
+    /* background: linear-gradient(135deg, #6a5ae0, #8e8eff); */
+    background-color: #8174A0;
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    height: 220px;
+}
+
+
+.welcome-text h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.welcome-text p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.get-started-btn {
+    margin-top: 15px;
+    background: white;
+    color: #8174A0;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.get-started-btn:hover {
+    background: #e4e4ff;
+}
+
+.welcome-img img {
+    width: 216px;
+    border-radius: 10px;
+}
+
+
+/* Cards */
+.stats-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-top: 15px;
+    justify-content: center;
+}
+
+
+.stats-box {
+
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 310px;
+    position: relative;
+    height: 140px;
+}
+
+.stats-content {
+    display: flex;
+    align-items: center;
+}
+
+.stats-content h3 {
+    margin: 0;
+    font-size: 18px;
+    color: black;
+}
+
+.stats-text {
+    font-size: 16px;
+    color: #2f2f4c;
+    /* Changed to dark blue-gray */
+    position: absolute;
+    right: 10px;
+    bottom: 2px;
+    margin-bottom: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.stats-icon {
+    font-size: 40px;
+    margin-right: 10px;
+    color: rgb(71, 234, 255);
+}
+
+
+/* Different colors for each box */
+.stats-box:nth-child(1) .stats-icon {
+    color: rgb(71, 234, 255);
+}
+
+/* Blue */
+.stats-box:nth-child(2) .stats-icon {
+    color: rgb(103, 105, 179);
+}
+
+/* Red */
+.stats-box:nth-child(3) .stats-icon {
+    color: rgb(54, 162, 235);
+}
+
+/* Dark Blue */
+.stats-box:nth-child(4) .stats-icon {
+    color: rgb(75, 192, 192);
+}
+
+/* Teal */
+.stats-box:nth-child(5) .stats-icon {
+    color: rgb(255, 205, 86);
+}
+
+/* Yellow */
+
+/* Different background colors for each stats box */
+.stats-box:nth-child(1) {
+    background: rgba(71, 234, 255, 0.2);
+}
+
+/* Light Blue */
+.stats-box:nth-child(2) {
+    background: rgba(54, 84, 190, 0.2);
+}
+
+/* Light Red */
+.stats-box:nth-child(3) {
+    background: rgba(54, 162, 235, 0.2);
+}
+
+/* Light Dark Blue */
+.stats-box:nth-child(4) {
+    background: rgba(75, 192, 192, 0.2);
+}
+
+/* Light Teal */
+.stats-box:nth-child(5) {
+    background: rgba(255, 205, 86, 0.2);
+}
+
+/* Light Yellow */
+
+/* Hover effect to darken the background */
+.stats-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Change background slightly on hover */
+.stats-box:nth-child(1):hover {
+    background: rgba(71, 234, 255, 0.4);
+}
+
+.stats-box:nth-child(2):hover {
+    background: rgba(71, 74, 128, 0.4);
+}
+
+.stats-box:nth-child(3):hover {
+    background: rgba(54, 162, 235, 0.4);
+}
+
+.stats-box:nth-child(4):hover {
+    background: rgba(75, 192, 192, 0.4);
+}
+
+.stats-box:nth-child(5):hover {
+    background: rgba(255, 205, 86, 0.4);
+}
+
+/* RESPONSIVE */
+/* HAMBURGER */
+/* Hide Sidebar and show Hamburger on small screens */
+/* Make Sidebar Responsive */
+@media screen and (max-width: 1024px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    /* Show Hamburger Menu */
+    .hamburger {
+        display: block;
+        position: absolute;
+        left: 15px;
+        top: 15px;
+        font-size: 24px;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    /* Show Sidebar when toggled */
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    /* Show Close Button */
+    .close-btn {
+        display: block;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 24px;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+    }
+
+    /* Overlay Background */
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* background: rgba(0, 0, 0, 0.5); */
+        /* z-index: 998; */
+    }
+
+    .overlay.show {
+        display: block;
+    }
+
+    /* Content Adjustment when Sidebar is Hidden */
+    .content {
+        margin-left: 0;
+    }
+}
+
+
+/* DASHBOARD OVERVIEW RESPONSIVE */
+@media screen and (max-width: 1024px) {
+    .content {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .dashboard-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .welcome-section {
+        flex-direction: column;
+        text-align: center;
+        height: auto;
+        padding: 20px;
+    }
+
+    .welcome-text {
+        margin-bottom: 15px;
+    }
+
+    .welcome-text h2 {
+        font-size: 20px;
+    }
+
+    .welcome-text p {
+        font-size: 16px;
+    }
+
+    .welcome-img img {
+        width: 180px;
+    }
+
+    .stats-container {
+        justify-content: center;
+    }
+
+    .stats-box {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+        padding: 15px;
+    }
+
+    .stats-icon {
+        font-size: 35px;
+    }
+
+    .stats-content h3 {
+        font-size: 16px;
+    }
+
+    .stats-text {
+        font-size: 20px;
+    }
+}
+
+/* Mobile View */
+@media screen and (max-width: 768px) {
+    .dashboard-title {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .stats-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .stats-box {
+        width: 90%;
+        max-width: 250px;
+    }
+}
+
+/* SUBJECT RESPONSIVE */
+@media screen and (max-width: 768px) {
+    #subjectsSection h2 {
+        text-align: center;
+     }
+}
+
+/* Adjust for Smaller Screens */
+@media screen and (max-width: 425px) {
+    #subjectsSection h2 {
+        text-align: center;
+     }
+}
+
+/* Adjust for Extra Small Screens */
+@media screen and (max-width: 375px) {
+    #subjectsSection h2 {
+        text-align: center;
+     }
+}
+
+/* Adjust for 320px Screens */
+@media screen and (max-width: 320px) {
+    #subjectsSection h2 {
+       text-align: center;
+    }
+}
+
+/* STUDENT RESPONSIVE */
+@media screen and (max-width: 768px) {
+    #studentsSection h2 {
+        text-align: center;
+     }
+}
+
+/* Adjust for Smaller Screens */
+@media screen and (max-width: 425px) {
+    #studentsSection h2 {
+        text-align: center;
+     }
+}
+
+/* Adjust for Extra Small Screens */
+@media screen and (max-width: 375px) {
+    #studentsSection h2 {
+        text-align: center;
+     }
+}
+
+/* Adjust for 320px Screens */
+@media screen and (max-width: 320px) {
+    #studentsSection h2 {
+       text-align: center;
+    }
+}
+
+
+/* QUIZ RESPONSIVE */
+/* Responsive Layout for Quiz Section Only */
+@media screen and (max-width: 768px) {
+    #quizzesSection .card label {
+        display: inline-block;
+        width: 45%;
+        /* text-align: right; */
+        margin-right: 10px;
+    }
+
+    #quizzesSection .card select, 
+    #quizzesSection .card input {
+        width: 50%;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    #quizzesSection h2 {
+        text-align: center;
+     }
+}
+
+/* Adjust for Smaller Screens */
+@media screen and (max-width: 425px) {
+    #quizzesSection .card label {
+        width: 40%;
+    }
+
+    #quizzesSection .card select, 
+    #quizzesSection .card input {
+        width: 55%;
+    }
+    #quizzesSection h2 {
+        text-align: center;
+     }
+}
+
+/* Adjust for Extra Small Screens */
+@media screen and (max-width: 375px) {
+    #quizzesSection .card label {
+        width: 38%;
+        font-size: 14px;
+    }
+
+    #quizzesSection .card select, 
+    #quizzesSection .card input {
+        width: 58%;
+    }
+    #quizzesSection h2 {
+        text-align: center;
+     }
+}
+
+/* Adjust for 320px Screens */
+@media screen and (max-width: 320px) {
+    #quizzesSection .card label {
+        width: 35%;
+        font-size: 12px;
+    }
+
+    #quizzesSection .card select, 
+    #quizzesSection .card input {
+        width: 62%;
+        font-size: 12px;
+        padding: 6px;
+    }
+    #quizzesSection h2 {
+       text-align: center;
+    }
+}
+
+/* Attendance responsiveness */
+/* Responsive Layout for Attendance Section */
+
+@media screen and (max-width: 768px) {
+    #attendanceSection .card {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    #attendanceSection .card label {
+        width: 45%;
+        text-align: right;
+        margin-right: 10px;
+    }
+
+    #attendanceSection .card select, 
+    #attendanceSection .card input {
+        width: 50%;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    #attendanceSection table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    #attendanceSection h2 {
+        text-align: center;
+    }
+}
+
+/* Adjust for Smaller Screens (Mobile) */
+@media screen and (max-width: 480px) {
+    #attendanceSection .card label {
+        width: 100%;
+        text-align: left;
+    }
+
+    #attendanceSection .card select, 
+    #attendanceSection .card input {
+        width: 100%;
+    }
+
+    #attendanceSection table {
+        font-size: 14px;
+    }
+    #attendanceSection h2 {
+        text-align: center;
+    }
+}
+
+/* Adjust for Extra Small Screens (320px) */
+@media screen and (max-width: 320px) {
+    /* #attendanceSection .card label {
+        font-size: 12px;
+    }
+
+    #attendanceSection .card select, 
+    #attendanceSection .card input {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    #attendanceSection table {
+        font-size: 12px;
+    } */
+    #attendanceSection h2 {
+        text-align: center;
+    }
+}
+
+
+ /* ATTENDANCE REPORT RESPONSIVE */
+
+/* ✅ Fix for 1440x525, 1024x473, and 768x473 - Align Buttons Side by Side */
+@media screen and (max-width: 1440px), screen and (max-width: 1024px) {
+    #reportsSection .card {
+        justify-content: space-between;
+    }
+
+    #reportsSection button {
+        width: 45%;
+        min-width: 120px;
+        margin-top: 10px;
+    }
+}
+@media screen and (min-width: 768px){
+    #reportsSection button {
+        width: 15%;
+        min-width: 120px;
+        margin-top: 9px;
+    }
+    
+}
+@media screen and (max-width: 1024px) {
+    #reportsSection h2{
+        text-align: center;
+    }
+}
+
+/* ✅ Fix for 375x473 - Ensure Proper Label & Input Alignment */
+@media screen and (max-width: 375px) {
+    #reportsSection .card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #reportsSection label {
+        width: 100%;
+        text-align: left;
+    }
+
+    #reportsSection select {
+        width: 100%;
+    }
+
+    #reportsSection button {
+        width: 100%;
+    }
+}
+
+
+/* FEEDBACK RESPONSIVE */
+@media screen and (max-width: 768px) {
+    #feedbackSection h2 {
+        text-align: center;
+     }
+}
+
+/* Adjust for Smaller Screens */
+@media screen and (max-width: 425px) {
+    #feedbackSection h2 {
+        text-align: center;
+     }
+}
+
+/* Adjust for Extra Small Screens */
+@media screen and (max-width: 375px) {
+    #feedbackSection h2 {
+        text-align: center;
+     }
+}
+
+/* Adjust for 320px Screens */
+@media screen and (max-width: 320px) {
+    #feedbackSection h2 {
+       text-align: center;
+    }
+}
+.error-message {
+    color: red;
+    font-size: 12px;
+    display: block;
+}
+
+/* TIMETABLE RESPONSIVE */
+/* Section Styling */
+#timetableSection {
+    padding: 20px;
+    background: #f8f8ff; /* Light Background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 24px;
+    color: #2f2f4c;
+    margin-bottom: 15px;
+}
+
+/* Table Styling */
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Scroll for small screens */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Ensures proper layout on small screens */
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+th {
+    background: #8174A0; /* Matching sidebar theme */
+    color: white;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    th, td {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    table {
+        min-width: 100%;
+        display: block;
+        overflow-x: auto;
+    }
+
+    th, td {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+}

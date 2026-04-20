@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Timetable</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        h2 {
+            margin: 20px 0;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        /* Timetable Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #003366;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        .current {
+            background-color: #ffcc00;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            th, td {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Teacher's Weekly Timetable</h2>
+    <div class="container">
+        <table id="timetable">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Session</th>
+                    <th>Section</th>
+                    <th>Subject</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Monday</td>
+                    <td>07:30 - 08:15</td>
+                    <td>2023</td>
+                    <td>A</td>
+                    <td>Physics</td>
+                </tr>
+                <tr>
+                    <td>Monday</td>
+                    <td>08:15 - 09:00</td>
+                    <td>2022</td>
+                    <td>B</td>
+                    <td>Biology Practical</td>
+                </tr>
+                <tr>
+                    <td>Monday</td>
+                    <td>09:00 - 09:45</td>
+                    <td>2024</td>
+                    <td>C</td>
+                    <td>Biology</td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td>07:30 - 08:15</td>
+                    <td>2023</td>
+                    <td>A</td>
+                    <td>Physics</td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td>08:15 - 09:00</td>
+                    <td>2022</td>
+                    <td>B</td>
+                    <td>Physics Practical</td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td>09:00 - 09:45</td>
+                    <td>2024</td>
+                    <td>C</td>
+                    <td>Biology</td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td>07:30 - 08:15</td>
+                    <td>2023</td>
+                    <td>A</td>
+                    <td>Physics</td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td>08:15 - 09:00</td>
+                    <td>2022</td>
+                    <td>B</td>
+                    <td>Chemistry Practical</td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td>07:30 - 08:15</td>
+                    <td>2023</td>
+                    <td>A</td>
+                    <td>Physics</td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td>08:15 - 09:00</td>
+                    <td>2022</td>
+                    <td>B</td>
+                    <td>Biology Practical</td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                    <td>07:30 - 08:15</td>
+                    <td>2023</td>
+                    <td>A</td>
+                    <td>Physics</td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                    <td>08:15 - 09:00</td>
+                    <td>2022</td>
+                    <td>B</td>
+                    <td>Physics Practical</td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td>07:30 - 08:15</td>
+                    <td>2023</td>
+                    <td>A</td>
+                    <td>Physics</td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td>08:15 - 09:00</td>
+                    <td>2022</td>
+                    <td>B</td>
+                    <td>Translation of Holy Quran</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function highlightCurrentClass() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const currentDay = days[now.getDay()];
+
+            const timetableRows = document.querySelectorAll("#timetable tbody tr");
+            
+            timetableRows.forEach(row => {
+                const day = row.cells[0].innerText;
+                for (let i = 1; i < row.cells.length; i++) {
+                    row.cells[i].classList.remove("current");
+                }
+
+                if (day === currentDay) {
+                    let timeCell = row.cells[1].innerText.split(" - ");
+                    let startTime = timeCell[0].trim();
+                    let startHour = parseInt(startTime.split(":")[0]);
+                    let startMin = parseInt(startTime.split(":")[1]);
+                    
+                    let endTime = timeCell[1].trim();
+                    let endHour = parseInt(endTime.split(":")[0]);
+                    let endMin = parseInt(endTime.split(":")[1]);
+
+                    if (
+                        (hours > startHour || (hours === startHour && minutes >= startMin)) &&
+                        (hours < endHour || (hours === endHour && minutes < endMin))
+                    ) {
+                        row.classList.add("current");
+                    }
+                }
+            });
+        }
+
+        setInterval(highlightCurrentClass, 1000);
+        highlightCurrentClass();
+    </script>
+
+</body>
+</html>

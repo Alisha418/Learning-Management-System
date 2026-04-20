@@ -1,0 +1,113 @@
+.submit_btn{
+    margin-right:8px;
+}
+.submit_btn:hover{
+
+    background:#8544c6 !important;
+    transform: scale(1.05);
+}
+.reset_btn:hover{
+    background:#E5D4F3 !important;
+	transform: scale(1.05);
+
+}
+
+input[name="btnsearch"]:hover{
+    background:#8544c6 !important;
+	transform: scale(1.05);
+
+}
+input[name="butAdd"]:hover{
+    background:#8544c6 !important;
+	transform: scale(1.05);
+
+}
+.submit_btn:active{
+    background: #551f7a !important; /* Darker shade for active */
+    transform: scale(0.98); /* Slightly shrink on click */
+
+}
+.reset_btn:active{
+    background: #8544c6 !important; /* Darker shade for active */
+    color:#FFFFFF;
+    border:1px solid #551f7a;
+    transform: scale(0.98); /* Slightly shrink on click */
+
+}
+
+input[name="btnsearch"]:active{
+    background: #551f7a !important; /* Darker shade for active */
+    transform: scale(0.98); /* Slightly shrink on click */
+
+}
+input[name="butAdd"]:active{
+    background: #551f7a !important; /* Darker shade for active */
+    transform: scale(0.98); /* Slightly shrink on click */
+
+}
+@media screen and (max-width: 1024px) {
+    #dname_empty{
+        font-size:16px;
+    }
+    #dname_size{
+        font-size:16px;
+    }
+    #dname_letter{
+        font-size:16px;
+    }
+    #dcode_empty{
+        font-size:16px;
+    }
+    #dcode_size{
+        font-size:16px;
+    }
+    #dcode_letter{
+        font-size:16px;
+        
+    }
+}
+
+/* 🔹 Small Screens (Phones: < 768px) */
+@media screen and (max-width: 768px) {
+    #dname_empty{
+        font-size:14px !important;
+    }
+    #dname_size{
+        font-size:14px !important;
+    }
+    #dname_letter{
+        font-size:14px !important;
+    }
+    #dcode_empty{
+        font-size:14px !important;
+    }
+    #dcode_size{
+        font-size:14px !important;
+    }
+    #dcode_letter{
+        font-size:14px !important;
+        
+    }
+}
+@media screen and (max-width: 480px) {
+    #dname_empty{
+        font-size:12px !important;
+    }
+    #dname_size{
+        font-size:12px !important;
+    }
+    #dname_letter{
+        font-size:12px !important;
+    }
+    #dcode_empty{
+        font-size:12px !important;
+    }
+    #dcode_size{
+        font-size:12px !important;
+    }
+    #dcode_letter{
+        font-size:12px !important;
+        
+    }
+}
+

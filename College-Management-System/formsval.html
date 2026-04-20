@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        .input-group {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-group">
+        <label for="name">Enter Your Name</label>
+        <input type="text" id="name" name="name" placeholder="" required>
+        <p class="error-message" id="name-empty-error">Name is required.</p>
+        <p class="error-message" id="name-invalid-error">Name must contain only alphabets.</p>
+        <br><br>
+
+        <label for="password">Enter Your Password</label>
+        <input type="text" id="password" name="password" placeholder="" required>
+        <p class="error-message" id="password-empty-error">Password is required.</p>
+        <p class="error-message" id="password-invalid-error">Password must be exactly 13 characters.</p>
+        <br><br>
+
+        <label for="retype-password">Re-Type Your Password</label>
+        <input type="text" id="retype-password" name="retype-password" placeholder="" required>
+        <p class="error-message" id="retype-empty-error">Retype password is required.</p>
+        <p class="error-message" id="retype-mismatch-error">Passwords do not match.</p>
+        <br><br>
+
+        <label for="phone">Enter Your Phone Number</label>
+        <input type="text" id="phone" name="phone" placeholder="" required>
+        <p class="error-message" id="phone-empty-error">Phone number is required.</p>
+        <p class="error-message" id="phone-invalid-error">Phone number must be 11 digits and contain only numbers.</p>
+        <br><br>
+
+        <label for="email">Enter Your Email</label>
+        <input type="text" id="email" name="email" placeholder="" required>
+        <p class="error-message" id="email-empty-error">Email is required.</p>
+        <p class="error-message" id="email-invalid-error">Invalid email format.</p>
+    </div>
+    <button type="submit" class="btn" onclick="validateForm()">Submit</button>
+
+    <script>
+        function validateForm() {
+            let nameInput = document.getElementById("name");
+            let passwordInput = document.getElementById("password");
+            let retypeInput = document.getElementById("retype-password");
+            let phoneInput = document.getElementById("phone");
+            let emailInput = document.getElementById("email");
+
+            let nameEmptyError = document.getElementById("name-empty-error");
+            let nameInvalidError = document.getElementById("name-invalid-error");
+
+            let passwordEmptyError = document.getElementById("password-empty-error");
+            let passwordInvalidError = document.getElementById("password-invalid-error");
+
+            let retypeEmptyError = document.getElementById("retype-empty-error");
+            let retypeMismatchError = document.getElementById("retype-mismatch-error");
+
+            let phoneEmptyError = document.getElementById("phone-empty-error");
+            let phoneInvalidError = document.getElementById("phone-invalid-error");
+
+            let emailEmptyError = document.getElementById("email-empty-error");
+            let emailInvalidError = document.getElementById("email-invalid-error");
+
+            let isValid = true;
+
+            // Name Validation (Empty & Alphabets only)
+            let namePattern = /^[A-Za-z\s]+$/;
+            if (nameInput.value.trim() === "") {
+                nameEmptyError.style.display = "block";
+                nameInvalidError.style.display = "none";
+                nameInput.style.border = "2px solid red";
+                isValid = false;
+            } else if (!namePattern.test(nameInput.value.trim())) {
+                nameInvalidError.style.display = "block";
+                nameEmptyError.style.display = "none";
+                nameInput.style.border = "2px solid red";
+                isValid = false;
+            } else {
+                nameEmptyError.style.display = "none";
+                nameInvalidError.style.display = "none";
+                nameInput.style.border = "1px solid #ccc";
+            }
+
+            // Password Validation (Empty & Length 13)
+            if (passwordInput.value.trim() === "") {
+                passwordEmptyError.style.display = "block";
+                passwordInvalidError.style.display = "none";
+                passwordInput.style.border = "2px solid red";
+                isValid = false;
+            } else if (passwordInput.value.trim().length !== 13) {
+                passwordInvalidError.style.display = "block";
+                passwordEmptyError.style.display = "none";
+                passwordInput.style.border = "2px solid red";
+                isValid = false;
+            } else {
+                passwordEmptyError.style.display = "none";
+                passwordInvalidError.style.display = "none";
+                passwordInput.style.border = "1px solid #ccc";
+            }
+
+            // Retype Password Validation (Empty & Must Match)
+            if (retypeInput.value.trim() === "") {
+                retypeEmptyError.style.display = "block";
+                retypeMismatchError.style.display = "none";
+                retypeInput.style.border = "2px solid red";
+                isValid = false;
+            } else if (retypeInput.value.trim() !== passwordInput.value.trim()) {
+                retypeMismatchError.style.display = "block";
+                retypeEmptyError.style.display = "none";
+                retypeInput.style.border = "2px solid red";
+                isValid = false;
+            } else {
+                retypeEmptyError.style.display = "none";
+                retypeMismatchError.style.display = "none";
+                retypeInput.style.border = "1px solid #ccc";
+            }
+
+            // Phone Number Validation (Empty, 11 Digits & Only Numbers)
+            let phonePattern = /^[0-9]{11}$/;
+            if (phoneInput.value.trim() === "") {
+                phoneEmptyError.style.display = "block";
+                phoneInvalidError.style.display = "none";
+                phoneInput.style.border = "2px solid red";
+                isValid = false;
+            } else if (!phonePattern.test(phoneInput.value.trim())) {
+                phoneInvalidError.style.display = "block";
+                phoneEmptyError.style.display = "none";
+                phoneInput.style.border = "2px solid red";
+                isValid = false;
+            } else {
+                phoneEmptyError.style.display = "none";
+                phoneInvalidError.style.display = "none";
+                phoneInput.style.border = "1px solid #ccc";
+            }
+
+            // Email Validation (Empty & Correct Format)
+            let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (emailInput.value.trim() === "") {
+                emailEmptyError.style.display = "block";
+                emailInvalidError.style.display = "none";
+                emailInput.style.border = "2px solid red";
+                isValid = false;
+            } else if (!emailPattern.test(emailInput.value.trim())) {
+                emailInvalidError.style.display = "block";
+                emailEmptyError.style.display = "none";
+                emailInput.style.border = "2px solid red";
+                isValid = false;
+            } else {
+                emailEmptyError.style.display = "none";
+                emailInvalidError.style.display = "none";
+                emailInput.style.border = "1px solid #ccc";
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+    <style>
+        .error-msg {
+            color: red;
+            display: none;
+        }
+
+        .error-msg2 {
+            color: red;
+            display: none;
+        }
+
+        .error-msg3 {
+            color: red;
+            display: none;
+        }
+
+        .error-msg4 {
+            color: red;
+            display: none;
+        }
+
+        .error-msg5 {
+            color: red;
+            display: none;
+        }
+
+        .error-msg6 {
+            color: red;
+            display: none;
+        }
+    </style>
+    <script>
+        function Submit(event) {
+            event.preventDefault();  // Prevent form submission
+
+            var input1 = document.getElementById("name");
+            var input2 = document.getElementById("password");
+            var input3 = document.getElementById("retype_password");
+            var input4 = document.getElementById("phone");
+            var input5 = document.getElementById("email");
+
+            var error_name = document.getElementById("e1");
+            var pass_error = document.getElementById("e2");
+            var retype_error = document.getElementById("e3");
+            var phone1_error = document.getElementById("e4");
+            var phone2_error = document.getElementById("e5");
+            var email_error = document.getElementById("e6");
+
+            // Reset all error messages
+            document.querySelectorAll(".error-msg").forEach(el => el.style.display = "none");
+            document.querySelectorAll("input").forEach(el => el.style.border = "1px solid #ccc");
+
+            // Field empty validation
+            if (input1.value == "" || input2.value == "" || input3.value == "" || input4.value == "" || input5.value == "") {
+                alert("Fields should not be empty");
+                return;
+            }
+
+            let regex = /^[A-Za-z]+$/;  // Only alphabets allowed
+            if (!regex.test(input1.value)) {
+                error_name.style.display = "block";
+                input1.style.border = "1px solid red";
+            }
+
+            if (input2.value.length != 13) {
+                pass_error.style.display = "block";
+                input2.style.border = "1px solid red";
+            }
+
+            if (input2.value != input3.value) {
+                retype_error.style.display = "block";
+                input3.style.border = "1px solid red";
+            }
+
+            let regex2 = /^[0-9]+$/;  // Only numbers allowed
+            if (input4.value.length != 11) {
+                phone1_error.style.display = "block";
+                input4.style.border = "1px solid red";
+            }
+            if (!regex2.test(input4.value)) {
+                phone2_error.style.display = "block";
+                input4.style.border = "1px solid red";
+            }
+
+            let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(input5.value)) {
+                email_error.style.display = "block";
+                input5.style.border = "1px solid red";
+            }
+
+            // If all conditions are met, submit the form
+            if (
+                emailPattern.test(input5.value) &&
+                regex2.test(input4.value) &&
+                input4.value.length == 11 &&
+                input2.value == input3.value &&
+                input2.value.length == 13 &&
+                regex.test(input1.value)
+            ) {
+                alert("Form submitted successfully");
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <form action="">
+        <input type="text" id="name" placeholder="Enter your name" style="margin-bottom: 20px;"><br>
+        <p class="error-msg" id="e1">Name must be alphabet only</p>
+        <input type="text" id="password" placeholder="Enter your password" style="margin-bottom: 20px;"><br>
+        <p class="error-msg2" id="e2">Password length must be 13 characters</p>
+        <input type="text" id="retype_password" placeholder="Retype your password" style="margin-bottom: 20px;"><br>
+        <p class="error-msg3" id="e3">Password and retype password must be same</p>
+        <input type="text" id="phone" placeholder="Enter your phone number" style="margin-bottom: 20px;"><br>
+        <p class="error-msg4" id="e4">Phone number must be 11 characters</p>
+        <p class="error-msg5" id="e5">Phone number must be number only</p>
+        <input type="text" id="email" placeholder="Enter your email" style="margin-bottom: 20px;"><br>
+        <p class="error-msg6" id="e6">Email format must be correct</p>
+        <input type="submit" id="submit" onclick="Submit()">
+    </form>
+</body>
+
+</html> -->

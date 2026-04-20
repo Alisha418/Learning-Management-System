@@ -1,0 +1,169 @@
+/*<script>
+    let timerMinutes = 10;
+    let timerSeconds = 0;
+    let timerDisplay = document.getElementById('timer');
+    
+    function updateTimer() {
+        if (timerSeconds == 0) {
+            if (timerMinutes == 0) {
+                alert("Time's up! Submitting quiz...");
+                document.getElementById('quizForm').submit();
+            } else {
+                timerMinutes--;
+                timerSeconds = 59;
+            }
+        } else {
+            timerSeconds--;
+        }
+    
+        let minutesDisplay = timerMinutes.toString().padStart(2, '0');
+        let secondsDisplay = timerSeconds.toString().padStart(2, '0');
+        timerDisplay.innerText = minutesDisplay + ":" + secondsDisplay;
+    }
+    
+    setInterval(updateTimer, 1000);
+    </script>*/
+    //
+
+
+    <?php
+include 'connection.php';
+
+$attempt_id = $_GET['attempt_id']; // Get attempt ID from URL
+
+// Check if attempt_id is set and valid
+if (!isset($attempt_id) || !is_numeric($attempt_id)) {
+    echo "Invalid attempt ID!";
+    exit();
+}
+
+// 1. Fetch attempt details using prepared statement
+$query = "SELECT * FROM quizattempt WHERE AttemptId = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $attempt_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$attempt = $result->fetch_assoc();
+
+// Check if attempt exists
+if (!$attempt) {
+    echo "No attempt found!";
+    exit();
+}
+
+$score = $attempt['Score'];
+$total_correct = $attempt['TotalCorrect'];
+$total_wrong = $attempt['TotalWrong'];
+
+// 2. Fetch quiz details using prepared statement
+$quiz_id = $attempt['Quiz_Id'];
+$query = "SELECT * FROM quiz WHERE QuizId = ?";
+$stmt2 = $conn->prepare($query);
+$stmt2->bind_param("i", $quiz_id);
+$stmt2->execute();
+$quiz_result = $stmt2->get_result();
+$quiz = $quiz_result->fetch_assoc();
+
+// Check if quiz exists
+if (!$quiz) {
+    echo "Quiz not found!";
+    exit();
+}
+
+// 3. Fetch total number of questions dynamically
+$query = "SELECT COUNT(*) as total_questions FROM quizquestions WHERE Quiz_Id = ?";
+$stmt3 = $conn->prepare($query);
+$stmt3->bind_param("i", $quiz_id);
+$stmt3->execute();
+$question_result = $stmt3->get_result();
+$question_row = $question_result->fetch_assoc();
+$total_questions = $question_row['total_questions'];
+
+
+?>
+<div class="main-content">
+    <div class="content-area">
+        <div class="dashboard-header">
+            <div class="quiz-title">
+                <i class="bi bi-lightbulb-fill me-2 fs-4 text-warning"></i>
+                <h2 class="dashboard-title">Quiz</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container_1">
+        <div class="result-card">
+            <h2>Quiz Results</h2>
+            <div class="result-section">
+                <h5>Total Questions:</h5>
+                <span class="value"><?php echo $total_questions; ?></span>
+            </div>
+            <div class="result-section">
+                <h5>Right Answers:</h5>
+                <span class="value"><?php echo $total_correct; ?></span>
+            </div>
+            <div class="result-section">
+                <h5>Wrong Answers:</h5>
+                <span class="value"><?php echo $total_wrong; ?></span>
+            </div>
+            <div class="result-section">
+                <h5>Score:</h5>
+                <span class="value"><?php echo $score . '%'; ?></span>
+            </div>
+        </div>
+    </div>
+</div>
+//
+/*<div class="survey-container" id="surveyContainer" style="display: none;">
+    <h2>Student Survey</h2>
+
+    <form class="survey-form" id="surveyForm">
+
+        <!-- Student ID -->
+        <label for="student-id">Student ID:</label>
+        <input type="text" id="student-id" required>
+        <span class="error" id="idError"></span>
+
+        <!-- Email -->
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <span class="error" id="emailError"></span>
+
+        <p class="fill">Fill Form</p>
+
+        <!-- Question 1 -->
+        <div class="questions-card">
+            <div class="questions">
+                <p>1. The course content is well-structured.</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="strongly agree"> A) Strongly Agree</label>
+                    <label><input type="radio" name="q1" value="agree"> B) Agree</label>
+                    <label><input type="radio" name="q1" value="disagree"> C) Disagree</label>
+                    <label><input type="radio" name="q1" value="strongly disagree"> D) Strongly Disagree</label>
+                </div>
+                <span class="error" id="q1Error"></span>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="questions-card">
+            <div class="questions">
+                <p>2. The instructor explains concepts clearly.</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="strongly agree"> A) Strongly Agree</label>
+                    <label><input type="radio" name="q2" value="agree"> B) Agree</label>
+                    <label><input type="radio" name="q2" value="disagree"> C) Disagree</label>
+                    <label><input type="radio" name="q2" value="strongly disagree"> D) Strongly Disagree</label>
+                </div>
+                <span class="error" id="q2Error"></span>
+            </div>
+        </div>
+
+       
+        <label for="feedback">Additional Feedback:</label>
+        <textarea id="feedback" name="feedback"  rows="4" placeholder="Write your feedback here..."></textarea>
+
+        <button type="submit" class="submit-btn">Submit</button>
+    </form>
+</div>
+
+</div>*

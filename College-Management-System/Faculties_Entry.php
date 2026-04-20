@@ -1,0 +1,122 @@
+<?php
+include("conection/connect.php");
+
+$id = "";
+$opr = "";
+if (isset($_GET['opr']))
+    $opr = $_GET['opr'];
+
+if (isset($_GET['rs_id']))
+    $id = $_GET['rs_id'];
+
+if (isset($_POST['btn_sub'])) {
+    $faculties_name = $_POST['fnametxt'];
+    $note = $_POST['notetxt'];
+    
+    $stmt = $mysqli->prepare("INSERT INTO facuties_tbl (faculties_name, note) VALUES (?, ?)");
+    $stmt->bind_param("ss", $faculties_name, $note);
+    
+    if ($stmt->execute()) {
+        $msg = "1 Row Inserted";
+    } else {
+        $msg = "Insert Error: " . $stmt->error;
+    }
+    
+    $stmt->close();
+}
+
+// Update data
+if (isset($_POST['btn_upd'])) {
+    $fac_name = $_POST['fnametxt'];
+    $note = $_POST['notetxt'];
+    
+    $stmt = $mysqli->prepare("UPDATE facuties_tbl SET faculties_name=?, note=? WHERE faculties_id=?");
+    $stmt->bind_param("ssi", $fac_name, $note, $id);
+    
+    if ($stmt->execute()) {
+        echo "<div style='background-color: white;padding: 20px;border: 1px solid black;margin-bottom: 25px;'>"
+           . "<span class='p_font'>"
+           . "Record Updated Successfully... !"
+           . "</span>"
+           . "</div>";
+    } else {
+        $msg = "Update Failed...!";
+    }
+    
+    $stmt->close();
+}
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/style_entry.css" />
+</head>
+<body>
+
+<?php
+if ($opr == "upd") {
+    $stmt = $mysqli->prepare("SELECT * FROM facuties_tbl WHERE faculties_id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $rs_upd = $result->fetch_assoc();
+    $stmt->close();
+
+?>
+
+<div class="panel panel-default">
+  		<div class="panel-heading"><h1><span class="glyphicon glyphicon-hdd"></span> Faculties Update Form</h1></div>
+  			<div class="panel-body">
+			<div class="container">
+				<p style="text-align:center;">Here, you'll update the faculties detail to record into database.</p>
+			</div>
+
+<div class="container_form">
+    <form method="post">
+        <div class='faculty_pos'>
+        
+            <input type="text" style="width: 250px;" class="form-control" name="fnametxt" value="<?php echo $rs_upd['faculties_name'];?>"/><br>
+        
+            <textarea name="notetxt" class="form-control" cols="18" value='<?php  echo $rs_upd['note'];?>' rows="4"></textarea><br><Br>
+        
+            <input type="submit" name="btn_upd" href="#" class="btn btn-primary btn-large" value="Register" />&nbsp;&nbsp;&nbsp;
+	    <input type="reset"  href="#" class="btn btn-primary btn-large" value="Cancel" />
+        </div>
+    </form>
+</div>
+
+<?php	
+}
+else
+{
+?>
+<div class="panel panel-default">
+  		<div class="panel-heading"><h1><span class="glyphicon glyphicon-hdd"></span> Faculties Entry Form</h1></div>
+  			<div class="panel-body">
+			<div class="container">
+				<p style="text-align:center;">Here, you'll add new facultie's detail to record into database.</p>
+			</div>
+
+
+<div class="container_form">
+    <form method="post">
+        <div class='faculty_pos'>
+        
+            <input type="text" style="width: 250px;" class="form-control" name="fnametxt" placeholder='Faculties name'/><br>
+        
+            <textarea name="notetxt" class="form-control" cols="18" placeholder='Add notes..' rows="4"></textarea><br><Br>
+        
+            <input type="submit" name="btn_sub" href="#" class="btn btn-primary btn-large" value="Register" />&nbsp;&nbsp;&nbsp;
+	    <input type="reset"  href="#" class="btn btn-primary btn-large" value="Cancel" />
+        </div>
+    </form>
+</div><!-- end of style_informatios -->
+
+<?php
+}
+?>
+</body>
+</html>
